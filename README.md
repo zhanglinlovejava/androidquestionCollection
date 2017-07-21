@@ -24,3 +24,19 @@ MediaRecorder.AudioSource.VOICE_COMMUNICATION 。
 机型：HTC M8 等某些带有 虚拟 Menu 键盘的手机
 解决方案：后来调查发现是这个Activity是全屏,屏蔽了Menu键盘的黑条. 但是跳转到QQ却把那个Menu的黑条显示了出来, 这导致发生了 screenSize 的变化 从而导致我的Activity销毁了.
 知道了这个原因, 在manifest中的 configChanges 添加screenSize 解决了这个问题
+
+4 自定义 imageview 点击的时候显示灰色  
+@Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                this.setColorFilter(0x33000000);
+                return super.onTouchEvent(event);
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                this.setColorFilter(null);
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
